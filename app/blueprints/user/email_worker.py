@@ -35,7 +35,7 @@ def send_confirmation_email(user_email, token_link):
     text = f'Visit {token_link} to activate your account. Ignore the message if you didn\'t register'
 
     part1 = MIMEText(text, "plain")
-    # TODO Email дважды отображает один и тот же текст
+    # TODO Email shows the same text twice; for some reason, 10minutemail changes link, so it becomes unclickable
     part2 = MIMEText(
         f'Click <a href="{token_link}">here</a> to confirm your email. Ignore this message if you didn\'t register'
         f' or visit this link {token_link} ',

@@ -11,7 +11,8 @@ load_dotenv(find_dotenv())
 
 SECRET_SALT = os.environ['SECRET_SALT']
 
-RATE = {}
+RATE = [{}]
+
 
 def requests_thread():
     global RATE
@@ -21,7 +22,7 @@ def requests_thread():
         rate = r.json()['data']
         rate['time'] = datetime.datetime.now()
         print(f'the rate is: {RATE}')
-        RATE = rate.copy()
+        RATE[0] = rate.copy()
         time.sleep(60)
 
 x = threading.Thread(target=requests_thread)
@@ -60,5 +61,5 @@ def get_current_price():
         return Response("Bad request. Invalid token", status=400)
     if not payload['is_activated']:
         return Response("Unauthorized. Confirm your email first", status=401)
-    print('I will return rate: ', RATE)
-    return RATE
+    print('I will return rate: ', RATE[0])
+    return RATE[0]

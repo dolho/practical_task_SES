@@ -60,4 +60,5 @@ def get_current_price():
         return Response("Bad request. Invalid token", status=400)
     if not payload['is_activated']:
         return Response("Unauthorized. Confirm your email first", status=401)
+    print('I will return rate: ', RATE)
     return RATE

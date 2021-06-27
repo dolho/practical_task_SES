@@ -1,1 +1,2 @@
-web: gunicorn server:app --port $PORT --host=0.0.0.0 --reload --workers 4 
+web: gunicorn server:app
+celery: celery --app app.blueprints.user.email_worker  worker --loglevel=INFO

@@ -16,9 +16,11 @@ RATE = {}
 def requests_thread():
     global RATE
     while True:
+        print('started to get info')
         r = requests.get('https://api.coinbase.com/v2/prices/BTC-UAH/buy')
         rate = r.json()['data']
         rate['time'] = datetime.datetime.now()
+        print(f'the rate is: {RATE}')
         RATE = rate.copy()
         time.sleep(60)
 

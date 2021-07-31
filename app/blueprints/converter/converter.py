@@ -38,8 +38,7 @@ SECRET_SALT = "salty_daf244"
 
 @blueprint_converter.route('/btcRate', methods=['GET'])
 def get_current_price():
-    """Example endpoint returning a list of colors by palette
-            This is using docstrings for specifications.
+    """returns current price of BTC in UAH
             ---
             tags:
               - Converter

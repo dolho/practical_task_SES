@@ -8,7 +8,6 @@ import os
 app = Flask(__name__)
 
 
-
 app.register_blueprint(blueprint_user)
 app.register_blueprint(blueprint_converter)
 swagger = Swagger(app)

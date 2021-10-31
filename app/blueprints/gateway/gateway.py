@@ -23,7 +23,7 @@ CHANNEL_SEND.exchange_declare(exchange='currency_rate', exchange_type='fanout')
 
 # CHANNEL_CONSUME =
 
-MICROSERVICE_RPC_CLIENT = MicroservicesRpcClient()
+MICROSERVICE_RPC_CLIENT = MicroservicesRpcClient(RABBITMQ_HOST)
 
 def form_response(result):
     print(result)

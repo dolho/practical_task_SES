@@ -6,9 +6,9 @@ import json
 
 class MicroservicesRpcClient(InterfaceMicroservicesRpcClient):
 
-    def __init__(self):
+    def __init__(self, broker_url):
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='localhost'))
+            pika.URLParameters(broker_url))
 
         self.channel = self.connection.channel()
 

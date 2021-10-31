@@ -19,6 +19,7 @@ jsonschema==3.2.0
 kombu==5.1.0
 MarkupSafe==2.0.1
 mistune==0.8.4
+pika==1.2.0
 prompt-toolkit==3.0.19
 PyJWT==2.1.0
 pyrsistent==0.17.3

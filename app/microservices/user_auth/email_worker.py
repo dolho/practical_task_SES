@@ -11,7 +11,7 @@ load_dotenv(find_dotenv())
 
 CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 CELERY_BACKEND_RPC = os.environ['CELERY_BACKEND_RPC']
-# TODO Поменять на переменные окружения
+
 
 app = Celery('email_worker', broker=CELERY_BROKER_URL,  backend=CELERY_BACKEND_RPC)
 

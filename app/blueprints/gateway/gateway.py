@@ -12,10 +12,10 @@ RABBITMQ_HOST = os.environ['CELERY_BROKER_URL']
 blueprint_gateway = Blueprint('gateway', __name__)
 
 
-
+def connect_to_rabbitmq():
+    return pika.BlockingConnection(pika.URLParameters(RABBITMQ_HOST))
 
 connection = connect_to_rabbitmq()
-
 
 # pika.ConnectionParameters(host=RABBITMQ_HOST)
 

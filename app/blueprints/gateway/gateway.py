@@ -8,7 +8,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 SECRET_SALT = os.environ['SECRET_SALT']
-RABBITMQ_HOST = os.environ['RABBITMQ_HOST']
+RABBITMQ_HOST = os.environ['CELERY_BROKER_URL']
 blueprint_gateway = Blueprint('gateway', __name__)
 
 

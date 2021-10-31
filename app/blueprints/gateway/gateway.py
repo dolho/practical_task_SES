@@ -13,7 +13,10 @@ blueprint_gateway = Blueprint('gateway', __name__)
 
 
 
-connection = pika.BlockingConnection( pika.URLParameters(RABBITMQ_HOST))
+
+connection = connect_to_rabbitmq()
+
+
 # pika.ConnectionParameters(host=RABBITMQ_HOST)
 
 CHANNEL_SEND = connection.channel()

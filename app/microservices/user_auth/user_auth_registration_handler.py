@@ -29,7 +29,7 @@ class UserAuthRegistrationHandler:
             return {"status": 400, "message": "Incorrect email or password"}
         try:
             return self.__user_model.login_user(email, password)
-        except ValueError:
+        except (ValueError, FileNotFoundError):
             return {"status": 400, "message": "Incorrect email or password"}
 
     def confirm_email(self, data: dict):

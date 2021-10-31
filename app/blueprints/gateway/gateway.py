@@ -8,12 +8,14 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 SECRET_SALT = os.environ['SECRET_SALT']
-RABBITMQ_HOST = os.environ['RABBITMQ_HOST']
+RABBITMQ_HOST = os.environ['CELERY_BROKER_URL']
 blueprint_gateway = Blueprint('gateway', __name__)
 
 
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host=RABBITMQ_HOST))
+
+connection = pika.BlockingConnection( pika.URLParameters(RABBITMQ_HOST))
+# pika.ConnectionParameters(host=RABBITMQ_HOST)
+
 CHANNEL_SEND = connection.channel()
 
 CHANNEL_SEND.exchange_declare(exchange='rpc_queue_user_auth', exchange_type='fanout')

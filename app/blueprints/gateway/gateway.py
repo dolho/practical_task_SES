@@ -90,6 +90,7 @@ def create_user():
             description: Given email or password is incorrect
         """
     email_confirmation_url = url_for("gateway.confirm_email", token="")
+    # TODO add https:// to email confirmation link
     user_data = {"email": request.headers['email'], "password": request.headers['password'],
                  "email_confirmation_url": request.host + "/" + email_confirmation_url}
     result = json.loads(MICROSERVICE_RPC_CLIENT.call_for_user("create", user_data))

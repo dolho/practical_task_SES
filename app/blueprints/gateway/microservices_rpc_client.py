@@ -21,7 +21,7 @@ class MicroservicesRpcClient(InterfaceMicroservicesRpcClient):
             auto_ack=True)
 
     def call_for_currency_rate(self, jwt_token, from_currency="BTC", to="UAH"):
-        self.check_connection()
+        self.reconnect()
         self.response = None
         self.corr_id = str(uuid.uuid4())
         self.channel.basic_publish(
@@ -37,7 +37,7 @@ class MicroservicesRpcClient(InterfaceMicroservicesRpcClient):
         return self.response.decode("utf-8")
 
     def call_for_user(self, action, data: dict):
-        self.check_connection()
+        self.reconnect()
         body = {"request": action} | data
         self.response = None
         self.corr_id = str(uuid.uuid4())
@@ -71,7 +71,7 @@ class MicroservicesRpcClient(InterfaceMicroservicesRpcClient):
             on_message_callback=self.on_response,
             auto_ack=True)
 
-    def check_connection(self):
+    def reconnect(self):
         if self.connection.is_open:
             pass
         else:

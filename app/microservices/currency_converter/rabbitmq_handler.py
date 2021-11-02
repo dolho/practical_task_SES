@@ -9,8 +9,9 @@ RABBITMQ_HOST = os.environ['RABBITMQ_HOST']
 
 class RabbitMQHandler:
  # TODO добавить абстрактный класс
-    def __init__(self, rabbitmq_connection, currency_handler):
-        self.__RABBITMQ_CONNECTION = rabbitmq_connection
+    def __init__(self, broker_url, currency_handler):
+        self.__broker_url = broker_url
+        self.__RABBITMQ_CONNECTION = pika.BlockingConnection(pika.URLParameters(self.__broker_url))
         self.__channel =  self.__RABBITMQ_CONNECTION.channel()
         self.__channel.queue_declare(queue='rpc_queue_rates')
         self.__channel.basic_qos(prefetch_count=1)
@@ -53,3 +54,19 @@ class RabbitMQHandler:
 
     def consume(self):
         self.__channel.start_consuming()
+
+
+    def connect_to_rabbitmq(self):
+        self.__RABBITMQ_CONNECTION = pika.BlockingConnection(pika.URLParameters(self.__broker_url))
+        self.__channel = self.__RABBITMQ_CONNECTION.channel()
+
+        self.__channel = self.__RABBITMQ_CONNECTION.channel()
+        self.__channel.queue_declare(queue='rpc_queue_rates')
+        self.__channel.basic_qos(prefetch_count=1)
+        self.__channel.basic_consume(queue='rpc_queue_rates', on_message_callback=self.currency_callback)
+
+    def check_connection(self):
+        if self.__RABBITMQ_CONNECTION.is_open:
+            pass
+        else:
+            self.connect_to_rabbitmq()

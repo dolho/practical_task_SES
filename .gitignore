@@ -126,6 +126,7 @@ venv.bak/
 dmypy.json
 
 app/blueprints/user/user_data/*
+app/microservices/user_auth/user_data/*
 
 # Pyre type checker
 .pyre/
